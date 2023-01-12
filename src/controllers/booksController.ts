@@ -33,5 +33,11 @@ export class BooksController {
         });
         
     }  
+
+    public async deleteById(req: Request, res: Response) : Promise<void> {
+        const {_id} = req.params;
+        await this.bookDao.deleteById(_id);
+        res.redirect('/books');
+    }
     
 }
