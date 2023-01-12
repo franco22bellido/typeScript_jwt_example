@@ -1,11 +1,19 @@
 import { Request, Response } from "express";
-import SchemaBook, {Book} from '../models/Book';
+import SchemaBook, {IBook} from '../models/Book';
+import IBookDao from "../dao/IBookDao";
 
 
-class BooksController {
+export class BooksController {
     
+    private bookDao: IBookDao;
+
+    constructor(injectionBookDao: IBookDao){
+        this.bookDao = injectionBookDao;
+    }
+
     public async listarBook(req: Request, res: Response): Promise<void> {
-        const books: Book[] = await SchemaBook.find();
+
+        const books: IBook[] = await this.bookDao.findAll();
         res.render('books/listar', {books});
     }
 
@@ -19,11 +27,11 @@ class BooksController {
     }  
     public async saveBook (req: Request, res: Response) : Promise<void> {
         const {title, author, isbn} = req.body;
-        const book: Book = new SchemaBook(title, author, isbn);
+        const book: IBook = new SchemaBook(title, author, isbn);
 
         await book.save();
         res.redirect('/books');
     }     
 }
 
-export const booksController =  new BooksController();
+// export const booksController =  new BooksController();

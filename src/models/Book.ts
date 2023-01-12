@@ -1,6 +1,6 @@
 import mongoose, {Schema, model} from "mongoose";
 
-export interface Book extends mongoose.Document{
+export interface IBook extends mongoose.Document{
     title :String,
     author : String,
     isbn: String
@@ -13,4 +13,4 @@ const bookSchema: Schema = new Schema({
     isbn: String
 })
 
-export default model<Book>("Book", bookSchema);
+export default model<IBook>("Book", bookSchema);
