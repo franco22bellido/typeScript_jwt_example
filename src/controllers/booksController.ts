@@ -13,15 +13,15 @@ export class BooksController {
     
     public async listarBook(req: Request, res: Response): Promise<void> {
         const books: IBook[] = await this.bookDao.findAll();
-        res.render('books/listar');
+        
+        res.render('books/listar', {books});
     }
     
 
     public async saveBook (req: Request, res: Response) : Promise<void> {
         const {title, author, isbn} = req.body;
-        const book: IBook = new SchemaBook(title, author, isbn);
+        const book: IBook = await this.bookDao.save(title,author,isbn);
     
-        await book.save();
         res.redirect('/books');
     }     
 
