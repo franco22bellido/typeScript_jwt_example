@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import SchemaBook, {IBook} from '../models/Book';
+import {IBook} from '../models/Book';
 import IBookDao from "../dao/IBookDao";
 
 
