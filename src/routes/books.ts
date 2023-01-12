@@ -1,20 +1,11 @@
-import { Router} from "express";
+import { Router, Request, Response, request, response} from "express";
 
 const router: Router = Router();
 
-// import {BooksController} from '../controllers/booksController';
-import {booksController} from '../injections/injected';
-
-// //injections:
-// import implBookOne from '../dao/bookImpls/implBookOne';
-// import IbookDao from "../dao/IBookDao";
-
-// let injection:IbookDao = new implBookOne();
-// let booksController = new BooksController(injection);
-
+import {booksController} from '../injections/injections';
 
 router.get('/', booksController.listarBook);
-router.get('/add', booksController.renderFormBook);
-router.post('/add', booksController.saveBook);
+router.get('/add',);
+router.post('/add',);
 
 export default router;
