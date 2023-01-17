@@ -6,7 +6,7 @@ import './database';
 //importing routes
 import welcomeRoutes from './routes/welcome';
 import booksRoutes from './routes/books';
-
+import auth from './routes/auth';
 
 //initializations
 const app  = express();
@@ -32,7 +32,7 @@ app.use(express.urlencoded({extended: false}));
 //routes
 app.use('/', welcomeRoutes);
 app.use('/books', booksRoutes);
-
+app.use('/auth', auth);
 
 //static files
 app.use(express.static(path.join(__dirname, 'public')));

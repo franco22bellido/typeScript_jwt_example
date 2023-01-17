@@ -11,13 +11,14 @@ export default class verifyLogged{
     public async isLoggedin(req: Request, res: Response , next: NextFunction): Promise<void>{
         
         try {
-            const token:string = req.header('x-access-token') || '';
-
-            const id: String = await this.Jwt.verifyToken(token);
-             
-            res.send('holamundo');
+            const token:string = req.header('x-access-token') as string;
+            const id: string = this.Jwt.verifyToken(token);
+            req.userId = id;
+            next();
         } catch (error) {
             res.json(error);
         }
     }
+    
+
 }

@@ -17,17 +17,19 @@ import BcryptImpl from '../dependecies/encrypt/bcryptImpl';
 import IUserDao from '../dao/IUserDao';
 import implUserOne from '../dao/UserImpls/ImplUserOne';
 
+//injections
+import IJwt from '../dependecies/jwt/IJwt' 
+import JwtImpl from '../dependecies/jwt/jwtImpl' 
+/**injectando a un midleware */
+
 /*injectando a authController */
 const userDao:IUserDao = new implUserOne();
 const bcrypt:IEcrypt = new BcryptImpl();
-export const authController = new AuthController(userDao,bcrypt);
+const jwt:IJwt = new JwtImpl('palabrasecreta');
+export const authController = new AuthController(userDao,bcrypt, jwt);
 
-//injections
-import IJwt from '../dependecies/jwt/IJwt' 
-import Jwt from '../dependecies/jwt/jwtImpl' 
-const jwt:IJwt = new Jwt('palabrasecreta');
-/**injectando a un midleware */
 
 export const verifilog = new verifyLogged(jwt);
+
 
 

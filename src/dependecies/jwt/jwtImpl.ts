@@ -1,23 +1,30 @@
 import IJwt from './IJwt';
+import jwt from 'jsonwebtoken'
+
+interface Ipayload{
+    _id : string;
+    iat: number;
+    exp: number;
+
+}
 
 
-export default class jwt implements IJwt{
+export default class jwtImpl implements IJwt{
 
-    secret: String;
-    constructor(secret : String){
+    secret: string;
+    constructor(secret : string){
         this.secret= secret
     }
-    generateToken(Id: String): String {
-        throw new Error('Method not implemented.');
+    generateToken(Id: String): string {
+
+        const token:string =  jwt.sign({Id}, this.secret, {expiresIn: "1d"});
+        return token;
     }
-    async verifyToken(token: string): Promise<string> {
-        if(token === 'token por aca'){
-            return 'holamundo'
+    verifyToken(token: string): string {
+        const payload = jwt.verify(token, this.secret) as Ipayload;
 
-        }else{
-            throw new Error('error por aca');
-
-        }
+        return payload._id;
+        
     }
 
 }

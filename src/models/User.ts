@@ -1,8 +1,8 @@
 import mongoose, {Schema, model} from "mongoose";
 
 export interface IUser extends mongoose.Document{
-    username: String;
-    password : String;
+    username: string;
+    password : string;
 }
 
 const userSchema = new Schema({
