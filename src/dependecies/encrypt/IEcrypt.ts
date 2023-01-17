@@ -1,5 +1,5 @@
 export default interface IEcrypt{
 
-    EncrypPassword(password: String): Promise<String>;
-    comparePassword(password: String, passwordEncrypted: String): Promise<boolean>;
+    EncrypPassword(password: string): Promise<string>;
+    comparePassword(password: string, passwordEncrypted: string): Promise<boolean>;
 }

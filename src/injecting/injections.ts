@@ -1,5 +1,6 @@
 import {BooksController} from '../controllers/booksController';
 import AuthController from '../controllers/authController';
+import verifyLogged from '../middlewares/verifyLoggedin';
 
 //injections:
 import IbookDao from "../dao/IBookDao";
@@ -20,3 +21,13 @@ import implUserOne from '../dao/UserImpls/ImplUserOne';
 const userDao:IUserDao = new implUserOne();
 const bcrypt:IEcrypt = new BcryptImpl();
 export const authController = new AuthController(userDao,bcrypt);
+
+//injections
+import IJwt from '../dependecies/jwt/IJwt' 
+import Jwt from '../dependecies/jwt/jwtImpl' 
+const jwt:IJwt = new Jwt('palabrasecreta');
+/**injectando a un midleware */
+
+export const verifilog = new verifyLogged(jwt);
+
+

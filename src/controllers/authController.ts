@@ -14,13 +14,17 @@ export default class authController {
     }
     public async register(req: Request, res: Response): Promise<void> {
         const { username, password } = req.body;
+
         const passwordEncrypt: String = await this.encriptador.EncrypPassword(password);
         await this.userDao.save(username, passwordEncrypt);
     }
+
+
     public async login(req: Request, res: Response): Promise<void> {
         try {
             const { username, password } = req.body;
             const userFound: IUser = await this.userDao.findOne(username);
+            
             const verifyPassword: boolean = await this.encriptador.comparePassword(password, userFound.password);
             if (verifyPassword != true) { throw new Error('la contraseña es incorrecta'); }
             

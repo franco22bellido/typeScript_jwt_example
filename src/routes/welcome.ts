@@ -3,12 +3,12 @@ import { Router} from "express";
 const router: Router = Router();
 
 import { indexController } from "../controllers/welcomeController";
-
+import {verifilog} from '../injecting/injections';
 
 router.get('/', indexController.welcome);
 
-router.post('/add', (req, res)=>{
-    res.send('fomulario');
+router.get('/vienven', (req, res, next)=>{
+    verifilog.isLoggedin(req, res, next);
 });
 
 
